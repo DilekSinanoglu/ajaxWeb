@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@model List<Reservation>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .btn {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;       
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2>Student Book Reservation System </h2>
+    <table border="1">
+        <thead>
+            <tr>              
+                <th  width="50">Reservation Id</th>
+                <th width="50">Book</th>
+                <th width="50">Student</th>
+                <th width="50">Do You Reserve</th>
+                <th width="50">Date</th>
+                <th width="20"> Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Reservation reserve in Model)
+            {
+            <tr>
+                <td>@reserve.Id</td>
+                <td>@reserve.Book.Title</td>
+                <td>@reserve.Student.Name</td>
+                <td>@reserve.Doyoureserve</td>
+                <td>@reserve.Date</td>
+                <td>
+                    <a href="#" class="btn btn-danger reserveDelete" data-rsvid="@reserve.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(".reserveDelete").click
+        (
+        function () {
+            var result = confirm("Do you want to delete the reservation?");
+            if (result)
+            {
+                var rsvId = $(this).data("rsvid");
+                $.ajax
+                    ({
+                        type: "POST",
+                        url: "/Home/Delete/" + rsvId,
+                        success:function () {
+                            alert("reservation deleted");
+                            window.location.replace("/Home/Index");
+                        },
+                        error: function () {
+                            alert("Error reservation deleted");
+
+                        }
+                    });
+            }          
+        }
+       )
+</script>
