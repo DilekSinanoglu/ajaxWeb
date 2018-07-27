@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace webBookReservation.Controllers
@@ -42,8 +41,7 @@ namespace webBookReservation.Controllers
 
         public ActionResult Index()
         {
-            
-
+           
             //View mwtodunun parametrelerin arasına bir değişken vermek 
             //o değişkenni model yöntemi ile viewa gönder demektir.
             return View(reservationList);
